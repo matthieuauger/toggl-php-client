@@ -1,0 +1,21 @@
+{
+    "name": "mog/toggl-php-client",
+    "type": "library",
+    "description": "PHP client library for accessing Toggl API",
+    "keywords": ["toggl", "api"],
+    "homepage": "https://github.com/matthieuauger/toggl-php-client",
+    "authors": [
+        {
+            "name": "Matthieu Auger",
+            "email": "mail@matthieuauger.com"
+        }
+    ],
+    "require": {
+        "guzzlehttp/guzzle": "5.2.x"
+    },
+    "autoload": {
+        "psr-0": {
+            "MOG\\TogglClient": "src"
+        }
+    }
+}
