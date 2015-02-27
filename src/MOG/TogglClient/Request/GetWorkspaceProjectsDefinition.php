@@ -33,7 +33,13 @@ class GetWorkspaceProjectsDefinition implements RequestDefinitionInterface
 
     public function getUrl()
     {
-        return sprintf('workspaces/%d/projects', $this->workspaceId);
+        $url = sprintf('workspaces/%d/projects', $this->workspaceId);
+
+        if (!empty($this->options)) {
+            $url = sprintf('%s?%s', $url, http_build_query($this->options));
+        }
+
+        return $url;
     }
 
     private function configureOptions(OptionsResolver $resolver)
@@ -49,13 +55,26 @@ class GetWorkspaceProjectsDefinition implements RequestDefinitionInterface
         $resolver->setAllowedValues(
             'active',
             array(
-                true,
-                false,
+                'true',
+                'false',
                 'both',
             )
         );
 
-        $resolver->setAllowedTypes('actual_hours', 'bool');
-        $resolver->setAllowedTypes('only_templates', 'bool');
+        $resolver->setAllowedValues(
+            'actual_hours',
+            array(
+                'true',
+                'false',
+            )
+        );
+
+        $resolver->setAllowedValues(
+            'only_templates',
+            array(
+                'true',
+                'false',
+            )
+        );
     }
 }
