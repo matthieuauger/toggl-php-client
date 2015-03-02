@@ -4,6 +4,7 @@
     "description": "PHP client library for accessing Toggl API",
     "keywords": ["toggl", "api"],
     "homepage": "https://github.com/matthieuauger/toggl-php-client",
+    "license": "MIT",
     "authors": [
         {
             "name": "Matthieu Auger",
