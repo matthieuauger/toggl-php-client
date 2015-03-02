@@ -19,15 +19,15 @@ abstract class AbstractRequestDefinition implements RequestDefinitionInterface
         $this->options = $resolver->resolve($options);
     }
 
-    public abstract function getMethod();
-    public abstract function getBaseUrl();
+    abstract public function getMethod();
+    abstract public function getBaseUrl();
 
     public function getUrl()
     {
         $url = $this->getBaseUrl();
 
         if (!empty($this->options)) {
-            $options = $this->transformOptions($this->options);
+            $options = $this->transformOptions();
 
             $url = sprintf('%s?%s', $url, http_build_query($options));
         }
