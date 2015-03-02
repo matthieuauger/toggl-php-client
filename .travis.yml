@@ -7,7 +7,7 @@ php:
 
 before_script:
     - composer self-update || true
-    - composer install --dev --prefer-dist
+    - composer install --prefer-dist
 
 script:
     - bin/atoum -ulr
