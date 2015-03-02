@@ -2,40 +2,21 @@
 
 namespace MOG\TogglClient\Request;
 
+use Symfony\Component\OptionsResolver\OptionsResolver;
+
 class PostTimeEntryDefinition implements RequestDefinitionInterface
 {
     /**
-     * @var integer
-     */
-    private $projectId;
-
-    /**
-     * @var \DateTime
-     */
-    private $start;
-
-    /**
-     * @var integer
-     */
-    private $duration;
-
-    /**
-     * @var string
-     */
-    private $description;
-
-    /**
      * @var array
      */
-    private $additionalParameters;
+    private $options;
 
-    public function __construct($projectId, \DateTime $start, $duration, $description, array $additionalParameters = array())
+    public function __construct(array $options = array())
     {
-        $this->projectId = $projectId;
-        $this->start = $start;
-        $this->duration = $duration;
-        $this->description = $description;
-        $this->additionalParameters = $additionalParameters;
+        $resolver = new OptionsResolver();
+        $this->configureOptions($resolver);
+
+        $this->options = $resolver->resolve($options);
     }
 
     public function getMethod()
@@ -54,13 +35,33 @@ class PostTimeEntryDefinition implements RequestDefinitionInterface
             'body' => json_encode(
                 array(
                     'time_entry' => array(
-                        'pid' => $this->projectId,
-                        'description' => $this->description,
-                        'start' => $this->start->format('c'),
-                        'duration' => $this->duration,
-                        'created_with' => 'mog/toggl-cli',
+                        'pid' => $this->options['project_id'],
+                        'description' => $this->options['description'],
+                        'start' => $this->options['start']->format('c'),
+                        'duration' => $this->options['duration'],
+                        'created_with' => $this->options['created_with'],
                     )
                 )
+            )
+        );
+    }
+
+    private function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver->setDefined(
+            array(
+                'description',
+                'workspace_id',
+                'project_id',
+                'task_id',
+                'billable',
+                'start',
+                'stop',
+                'duration',
+                'created_with',
+                'tags',
+                'duronly',
+                'at',
             )
         );
     }
