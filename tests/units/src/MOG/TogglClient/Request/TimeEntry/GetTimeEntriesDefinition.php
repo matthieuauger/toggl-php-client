@@ -1,9 +1,9 @@
 <?php
 
-namespace MOG\TogglClient\Tests\Units\Request;
+namespace MOG\TogglClient\Tests\Units\Request\TimeEntry;
 
 use atoum;
-use MOG\TogglClient\Request\GetTimeEntriesDefinition as SUT;
+use MOG\TogglClient\Request\TimeEntry\GetTimeEntriesDefinition as SUT;
 
 class GetTimeEntriesDefinition extends atoum
 {
@@ -17,7 +17,7 @@ class GetTimeEntriesDefinition extends atoum
                 $options = array($optionName => $value)
             )
             ->then
-                ->object(new SUT($options))->isInstanceOf('MOG\TogglClient\Request\GetTimeEntriesDefinition')
+                ->object(new SUT($options))->isInstanceOf('MOG\TogglClient\Request\TimeEntry\GetTimeEntriesDefinition')
         ;
     }
 

@@ -1,9 +1,9 @@
 <?php
 
-namespace MOG\TogglClient\Tests\Units\Request;
+namespace MOG\TogglClient\Tests\Units\Request\TimeEntry;
 
 use atoum;
-use MOG\TogglClient\Request\PostTimeEntryDefinition as SUT;
+use MOG\TogglClient\Request\TimeEntry\PostTimeEntryDefinition as SUT;
 
 class PostTimeEntryDefinition extends atoum
 {
@@ -17,7 +17,7 @@ class PostTimeEntryDefinition extends atoum
                 $options = array($optionName => $value)
             )
             ->then
-                ->object(new SUT($options))->isInstanceOf('MOG\TogglClient\Request\PostTimeEntryDefinition')
+                ->object(new SUT($options))->isInstanceOf('MOG\TogglClient\Request\TimeEntry\PostTimeEntryDefinition')
         ;
     }
 
@@ -28,9 +28,9 @@ class PostTimeEntryDefinition extends atoum
 
         return array(
             array('description', 'Save Gotham'),
-            array('workspace_id', 1),
-            array('project_id', 2),
-            array('task_id', 3),
+            array('wid', 1),
+            array('pid', 2),
+            array('tid', 3),
             array('billable', 'true'),
             array('start', $startDate),
             array('stop', $stopDate),

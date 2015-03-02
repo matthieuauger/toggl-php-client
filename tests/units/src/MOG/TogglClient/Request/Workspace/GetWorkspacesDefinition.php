@@ -1,9 +1,9 @@
 <?php
 
-namespace MOG\TogglClient\Tests\Units\Request;
+namespace MOG\TogglClient\Tests\Units\Request\Workspace;
 
 use atoum;
-use MOG\TogglClient\Request\GetWorkspacesDefinition as SUT;
+use MOG\TogglClient\Request\Workspace\GetWorkspacesDefinition as SUT;
 
 class GetWorkspacesDefinition extends atoum
 {
@@ -12,7 +12,7 @@ class GetWorkspacesDefinition extends atoum
         $this
             ->given()
             ->then
-                ->object(new SUT())->isInstanceOf('MOG\TogglClient\Request\GetWorkspacesDefinition')
+                ->object(new SUT())->isInstanceOf('MOG\TogglClient\Request\Workspace\GetWorkspacesDefinition')
         ;
     }
 

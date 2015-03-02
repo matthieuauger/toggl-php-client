@@ -3,10 +3,10 @@
 namespace MOG\TogglClient;
 
 use GuzzleHttp\Client;
-use MOG\TogglClient\Request\GetTimeEntriesDefinition;
-use MOG\TogglClient\Request\GetWorkspaceProjectsDefinition;
-use MOG\TogglClient\Request\GetWorkspacesDefinition;
-use MOG\TogglClient\Request\PostTimeEntryDefinition;
+use MOG\TogglClient\Request\Workspace\GetWorkspaceProjectsDefinition;
+use MOG\TogglClient\Request\Workspace\GetWorkspacesDefinition;
+use MOG\TogglClient\Request\TimeEntry\GetTimeEntriesDefinition;
+use MOG\TogglClient\Request\TimeEntry\PostTimeEntryDefinition;
 use MOG\TogglClient\Request\RequestDefinitionInterface;
 
 class TogglClient
@@ -38,54 +38,55 @@ class TogglClient
     private function send(RequestDefinitionInterface $definition)
     {
         $response = $this->client->send(
-            $this->client->createRequest($definition->getMethod(), $definition->getUrl(), $definition->getOptions())
+            $this->client->createRequest(
+                $definition->getMethod(),
+                $definition->getUrl(),
+                array(
+                    'body' => json_encode($definition->getBody()),
+                )
+            )
         );
 
         return $response->json();
     }
 
     /**
-     * @param array $additionalParameters
+     * @param array $options
      *
      * @return mixed
      */
-    public function getWorkspaces(array $additionalParameters = array())
+    public function getWorkspaces(array $options = array())
     {
-        return $this->send(new GetWorkspacesDefinition($additionalParameters));
+        return $this->send(new GetWorkspacesDefinition($options));
     }
 
     /**
-     * @param $workspaceId
-     * @param array $additionalParameters
+     * @param array $options
      *
      * @return array
      */
-    public function getWorkspaceProjects($workspaceId, array $additionalParameters = array())
+    public function getWorkspaceProjects(array $options = array())
     {
-        return $this->send(new GetWorkspaceProjectsDefinition($workspaceId, $additionalParameters));
+        return $this->send(new GetWorkspaceProjectsDefinition($options));
     }
 
     /**
-     * @param array $additionalParameters
+     * @param array $options
      *
      * @return array
      */
-    public function getTimeEntries(array $additionalParameters = array())
+    public function getTimeEntries(array $options = array())
     {
-        return $this->send(new GetTimeEntriesDefinition($additionalParameters));
+        return $this->send(new GetTimeEntriesDefinition($options));
     }
 
     /**
-     * @param $projectId
-     * @param \DateTime $start
-     * @param $duration
-     * @param $description
-     * @param array $additionalParameters
+     * @param array $options
      *
      * @return array
      */
-    public function startTimeEntry($projectId, \DateTime $start, $duration, $description, array $additionalParameters = array())
+    public function startTimeEntry(array $options = array())
     {
-        return $this->send(new PostTimeEntryDefinition($projectId, $start, $duration, $description, $additionalParameters));
+        return $this->send(new PostTimeEntryDefinition($options));
     }
 }
