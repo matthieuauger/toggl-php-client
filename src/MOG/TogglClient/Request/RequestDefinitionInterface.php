@@ -6,4 +6,5 @@ interface RequestDefinitionInterface
 {
     public function getMethod();
     public function getUrl();
+    public function getOptions();
 }

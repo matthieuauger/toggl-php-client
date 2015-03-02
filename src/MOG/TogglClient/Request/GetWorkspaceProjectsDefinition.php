@@ -42,6 +42,11 @@ class GetWorkspaceProjectsDefinition implements RequestDefinitionInterface
         return $url;
     }
 
+    public function getOptions()
+    {
+        return array();
+    }
+
     private function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefined(

@@ -23,4 +23,9 @@ class GetTimeEntriesDefinition implements RequestDefinitionInterface
     {
         return 'time_entries';
     }
+
+    public function getOptions()
+    {
+        return array();
+    }
 }

@@ -23,4 +23,9 @@ class GetWorkspacesDefinition implements RequestDefinitionInterface
     {
         return 'workspaces';
     }
+
+    public function getOptions()
+    {
+        return array();
+    }
 }

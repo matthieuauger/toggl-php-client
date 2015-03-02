@@ -6,6 +6,7 @@ use GuzzleHttp\Client;
 use MOG\TogglClient\Request\GetTimeEntriesDefinition;
 use MOG\TogglClient\Request\GetWorkspaceProjectsDefinition;
 use MOG\TogglClient\Request\GetWorkspacesDefinition;
+use MOG\TogglClient\Request\PostTimeEntryDefinition;
 use MOG\TogglClient\Request\RequestDefinitionInterface;
 
 class TogglClient
@@ -37,7 +38,7 @@ class TogglClient
     private function send(RequestDefinitionInterface $definition)
     {
         $response = $this->client->send(
-            $this->client->createRequest($definition->getMethod(), $definition->getUrl())
+            $this->client->createRequest($definition->getMethod(), $definition->getUrl(), $definition->getOptions())
         );
 
         return $response->json();
@@ -72,5 +73,19 @@ class TogglClient
     public function getTimeEntries(array $additionalParameters = array())
     {
         return $this->send(new GetTimeEntriesDefinition($additionalParameters));
+    }
+
+    /**
+     * @param $projectId
+     * @param \DateTime $start
+     * @param $duration
+     * @param $description
+     * @param array $additionalParameters
+     *
+     * @return array
+     */
+    public function startTimeEntry($projectId, \DateTime $start, $duration, $description, array $additionalParameters = array())
+    {
+        return $this->send(new PostTimeEntryDefinition($projectId, $start, $duration, $description, $additionalParameters));
     }
 }
