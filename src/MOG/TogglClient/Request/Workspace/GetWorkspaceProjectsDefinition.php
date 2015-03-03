@@ -14,7 +14,7 @@ class GetWorkspaceProjectsDefinition extends AbstractRequestDefinition
 
     public function getBaseUrl()
     {
-        return sprintf('workspaces/%d/projects', $this->options['wid']);
+        return sprintf('workspaces/%d/projects', $this->getOptions()['wid']);
     }
 
     protected function configureOptions(OptionsResolver $resolver)
@@ -47,19 +47,19 @@ class GetWorkspaceProjectsDefinition extends AbstractRequestDefinition
     {
         $transformedOptions = array();
 
-        if (array_key_exists('active', $this->options)) {
-            if (true === $this->options['active']) {
+        if (array_key_exists('active', $this->getOptions())) {
+            if (true === $this->getOptions()['active']) {
                 $transformedOptions['active'] = 'true';
-            } elseif (false === $this->options['active']) {
+            } elseif (false === $this->getOptions()['active']) {
                 $transformedOptions['active'] = 'false';
             }
         }
 
-        if (true === array_key_exists('actual_hours', $this->options)) {
+        if (true === array_key_exists('actual_hours', $this->getOptions())) {
             $transformedOptions['actual_hours'] = $transformedOptions['actual_hours'] ? 'true' : 'false';
         }
 
-        if (true === array_key_exists('only_templates', $this->options)) {
+        if (true === array_key_exists('only_templates', $this->getOptions())) {
             $transformedOptions['only_templates'] = $transformedOptions['only_templates'] ? 'true' : 'false';
         }
 

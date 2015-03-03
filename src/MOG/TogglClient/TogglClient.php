@@ -3,7 +3,9 @@
 namespace MOG\TogglClient;
 
 use GuzzleHttp\Client;
+use MOG\TogglClient\Request\Client\GetClientDefinition;
 use MOG\TogglClient\Request\Client\PostClientDefinition;
+use MOG\TogglClient\Request\Workspace\GetWorkspaceClientsDefinition;
 use MOG\TogglClient\Request\Workspace\GetWorkspaceProjectsDefinition;
 use MOG\TogglClient\Request\Workspace\GetWorkspacesDefinition;
 use MOG\TogglClient\Request\TimeEntry\GetTimeEntriesDefinition;
@@ -59,6 +61,26 @@ class TogglClient
     public function postClient(array $options = array())
     {
         return $this->send(new PostClientDefinition($options));
+    }
+
+    /**
+     * @param array $options
+     *
+     * @return mixed
+     */
+    public function getWorkspaceClients(array $options = array())
+    {
+        return $this->send(new GetWorkspaceClientsDefinition($options));
+    }
+
+    /**
+     * @param array $options
+     *
+     * @return mixed
+     */
+    public function getClient(array $options = array())
+    {
+        return $this->send(new GetClientDefinition($options));
     }
 
     /**

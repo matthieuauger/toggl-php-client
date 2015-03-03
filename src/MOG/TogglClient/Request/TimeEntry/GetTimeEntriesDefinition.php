@@ -32,14 +32,14 @@ class GetTimeEntriesDefinition extends AbstractRequestDefinition
 
     protected function transformOptions()
     {
-        $transformedOptions = $this->options;
+        $transformedOptions = $this->getOptions();
 
-        if (true === array_key_exists('start_date', $this->options)) {
-            $transformedOptions['start_date'] = $this->options['start_date']->format('c');
+        if (true === array_key_exists('start_date', $transformedOptions)) {
+            $transformedOptions['start_date'] = $transformedOptions['start_date']->format('c');
         }
 
-        if (true === array_key_exists('end_date', $this->options)) {
-            $transformedOptions['end_date'] = $this->options['end_date']->format('c');
+        if (true === array_key_exists('end_date', $transformedOptions)) {
+            $transformedOptions['end_date'] = $transformedOptions['end_date']->format('c');
         }
 
         return $transformedOptions;
