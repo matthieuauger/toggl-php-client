@@ -52,7 +52,7 @@ abstract class AbstractRequestDefinition implements RequestDefinitionInterface
     {
         $url = $this->getBaseUrl();
 
-        if (!empty($this->optional)) {
+        if ('GET' === $this->getMethod() && !empty($this->optional)) {
             $options = $this->transformOptions();
 
             $url = sprintf('%s?%s', $url, http_build_query($options));
