@@ -5,28 +5,29 @@ namespace MOG\TogglClient\Request\Client;
 use MOG\TogglClient\Request\AbstractRequestDefinition;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class PostClientDefinition extends AbstractRequestDefinition
+class PutClientDefinition extends AbstractRequestDefinition
 {
     public function getMethod()
     {
-        return 'POST';
+        return 'PUT';
     }
 
     public function getBaseUrl()
     {
-        return 'clients';
+        return sprintf('clients/%d', $this->getOptions()['cid']);
     }
 
     public function getBody()
     {
+        $options = $this->getOptions();
+
         return array(
             'client' => array(
-                'name' => $this->options['name'],
-                'wid' => $this->options['wid'],
-                'notes' => $this->options['notes'],
-                'hrate' => $this->options['hrate'],
-                'cur' => $this->options['cur'],
-                'at' => $this->options['at'],
+                'name' => $options['name'],
+                'notes' => $options['notes'],
+                'hrate' => $options['hrate'],
+                'cur' => $options['cur'],
+                'at' => $options['at'],
             )
         );
     }
@@ -35,8 +36,8 @@ class PostClientDefinition extends AbstractRequestDefinition
     {
         $resolver->setDefined(
             array(
+                'cid',
                 'name',
-                'wid',
                 'notes',
                 'hrate',
                 'cur',
@@ -44,17 +45,12 @@ class PostClientDefinition extends AbstractRequestDefinition
             )
         );
 
-        $resolver->setRequired(
-            array(
-                'name',
-                'wid',
-            )
-        );
+        $resolver->setRequired('cid');
 
         $resolver->setAllowedTypes(
             array(
+                'cid' => 'integer',
                 'name' => 'string',
-                'wid' => 'integer',
                 'notes' => 'string',
                 'hrate' => 'float',
                 'cur' => 'string',

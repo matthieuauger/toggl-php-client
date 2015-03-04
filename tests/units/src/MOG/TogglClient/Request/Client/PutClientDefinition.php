@@ -3,9 +3,9 @@
 namespace MOG\TogglClient\Tests\Units\Request\Client;
 
 use atoum;
-use MOG\TogglClient\Request\Client\PostClientDefinition as SUT;
+use MOG\TogglClient\Request\Client\PutClientDefinition as SUT;
 
-class PostClientDefinition extends atoum
+class PutClientDefinition extends atoum
 {
     /**
      * @dataProvider optionsDataProvider
@@ -15,13 +15,12 @@ class PostClientDefinition extends atoum
         $this
             ->given(
                 $options = array(
-                    'name' => 'Ozymandias',
-                    'wid' => 1,
+                    'cid' => 1,
                     $optionName => $value
                 )
             )
             ->then
-            ->object(new SUT($options))->isInstanceOf('MOG\TogglClient\Request\Client\PostClientDefinition')
+            ->object(new SUT($options))->isInstanceOf('MOG\TogglClient\Request\Client\PutClientDefinition')
         ;
     }
 
@@ -33,5 +32,22 @@ class PostClientDefinition extends atoum
             array('cur', '€'),
             array('at', 1425414111),
         );
+    }
+
+    public function testUrl()
+    {
+        $this
+            ->given(
+                $options = array(
+                    'cid' => 1,
+                    'notes' => 'Smartest man of the earth',
+                )
+            )
+            ->and(
+                $definition = new SUT($options)
+            )
+            ->then
+            ->string($definition->getUrl())->isIdenticalTo('clients/1')
+        ;
     }
 }
