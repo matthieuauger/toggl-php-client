@@ -39,6 +39,7 @@ class GetWorkspaceProjectsDefinition extends AbstractRequestDefinition
             )
         );
 
+        $resolver->setAllowedTypes('wid', 'integer');
         $resolver->setAllowedTypes('actual_hours', 'bool');
         $resolver->setAllowedTypes('only_templates', 'bool');
     }
