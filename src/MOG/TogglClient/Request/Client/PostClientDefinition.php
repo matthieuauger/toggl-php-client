@@ -19,14 +19,16 @@ class PostClientDefinition extends AbstractRequestDefinition
 
     public function getBody()
     {
+        $options = $this->getOptions();
+
         return array(
             'client' => array(
-                'name' => $this->options['name'],
-                'wid' => $this->options['wid'],
-                'notes' => $this->options['notes'],
-                'hrate' => $this->options['hrate'],
-                'cur' => $this->options['cur'],
-                'at' => $this->options['at'],
+                'name' => $options['name'],
+                'wid' => $options['wid'],
+                'notes' => $options['notes'],
+                'hrate' => $options['hrate'],
+                'cur' => $options['cur'],
+                'at' => $options['at'],
             )
         );
     }
