@@ -27,7 +27,8 @@ class PutClientDefinition extends atoum
     public function optionsDataProvider()
     {
         return array(
-            array('notes', 'Smartest man of the earth'),
+            array('name', 'Manhattan'),
+            array('notes', 'God'),
             array('hrate', 10.0),
             array('cur', '€'),
             array('at', 1425414111),
