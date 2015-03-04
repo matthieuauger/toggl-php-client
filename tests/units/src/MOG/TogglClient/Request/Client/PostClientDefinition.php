@@ -34,4 +34,22 @@ class PostClientDefinition extends atoum
             array('at', 1425414111),
         );
     }
+
+    public function testUrl()
+    {
+        $this
+            ->given(
+                $options = array(
+                    'name' => 'Ozymandias',
+                    'wid' => 1,
+                    'notes' => 'Smartest man of the earth',
+                )
+            )
+            ->and(
+                $definition = new SUT($options)
+            )
+            ->then
+            ->string($definition->getUrl())->isIdenticalTo('clients')
+        ;
+    }
 }
